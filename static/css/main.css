@@ -1,0 +1,53 @@
+body {
+    font-family: sans-serif;
+    background-color: #d68080;
+}
+h1 {
+    text-align: center;
+}
+input[type=text] {
+    width: 10vw;
+    height: 3vh;
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+    font-size: 5vh;
+    font-family: sans-serif;
+    background-color: inherit;
+    border: none;
+    border-bottom: 2px solid black;
+}
+input[type=text]:focus {
+    border: none;
+    border-bottom: 2px solid red;
+    background-color: #d68080;
+}
+input[type=submit] {
+    width: 10em;
+    background-color: whitesmoke;
+    margin-top: 1em;
+}
+input[type=submit]:hover {
+    cursor: pointer;
+    background-color: white;
+}
+img {
+    width: 15em;
+    height: 15em;
+    align-items: center;
+}
+.images {
+    text-align: center;
+}
+td {
+    text-align: center;
+}
+
+#confusion-matrix th, #confusion-matrix td {
+    border-bottom: solid;
+    border-width: thin;
+    border-right: solid;
+    border-width: thin;
+}
+.prediction_res {
+    margin-top: 1em;
+}

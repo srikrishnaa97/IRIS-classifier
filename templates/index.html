@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>IRIS classifier</title>
+{% endblock %}
+
+
+{% block body %}
+
+<h1>IRIS Classifier model</h1>
+
+<p>Please input the attributes of the individual:</p>
+<form action="{{url_for('predict')}}" method="POST">
+    Sepal Length (cm): &nbsp;&nbsp;<input type="text" name="sepal_len" id="sepal_len" required><br>
+    Sepal Width (cm): &nbsp;&nbsp;<input type="text" name="sepal_width" id="sepal_width" required><br>
+    Petal Length (cm): &nbsp;&nbsp;<input type="text" name="petal_len" id="petal_len" required><br>
+    Petal Width (cm): &nbsp;&nbsp;<input type="text" name="petal_width" id="petal_width" required><br>
+    <input type="submit" name="Submit" id="Submit">
+</form>
+<div class="prediction_res">
+{% if prediction|length < 1 %}
+<span></span>
+{% elif prediction == [-999] %}
+<span>Input error! Try again using only floating point numbers</span>
+{% else %}
+<p>The species is: </p>
+{% if prediction == [0] %}
+<img src="{{url_for('static',filename='images/iris-setosa.jpg')}}" alt="0. Iris Setosa"><br>
+<span>0. Iris Setosa</span>
+{% elif prediction == [1] %}
+<img src="{{url_for('static',filename='images/iris-versicolor.jpg')}}" alt="1. Iris Versicolor"><br>
+<span>1. Iris Versicolor</span>
+{% else %}
+<img src="{{url_for('static',filename='images/iris-virginica.jpg')}}" alt="2. Iris Virginica"><br>
+<span>2. Iris Virginica</span>
+{% endif %}
+{% endif %}
+</div>
+<h3>Description</h3>
+<p>The famous Iris database, first used by Sir R.A. Fisher. The dataset is taken
+    from Fisher's paper. Note that it's the same as in R, but not as in the UCI
+    Machine Learning Repository, which has two wrong data points.</p>
+
+<p>This is perhaps the best known database to be found in the
+    pattern recognition literature.  Fisher's paper is a classic in the field and
+    is referenced frequently to this day.  (See Duda & Hart, for example.)  The
+    data set contains 3 classes of 50 instances each, where each class refers to a
+    type of iris plant.  One class is linearly separable from the other 2; the
+    latter are NOT linearly separable from each other.</p>
+
+
+<p>Species of Iris:</p>
+<table class="images-table">
+<tr>
+    <td><img src="{{url_for('static',filename='images/iris-setosa.jpg')}}" alt="0. Iris Setosa"></td>
+    <td><img src="{{url_for('static',filename='images/iris-versicolor.jpg')}}" alt="1. Iris Versicolor"></td>
+    <td><img src="{{url_for('static',filename='images/iris-virginica.jpg')}}" alt="2. Iris Virginica"></td>
+</tr>
+<tr>
+    <td class="captions">0. Iris Setosa</td>
+    <td class="captions">1. Iris Versicolor</td>
+    <td class="captions">2. Iris Virginica</td>
+</tr>
+</table>
+<p>(images from wikipedia)</p>
+<br>
+<p>Attributes:</p>
+<ol>
+    <li>Sepal Lenth (cm)</li>
+    <li>Sepal Width (cm)</li>
+    <li>Petal Length (cm)</li>
+    <li>Petal Width (cm)</li>
+</ol>
+
+<p>Using a linear support vector classifier, the species can be predicted by giving just 
+    the petal and sepal features as input. Using 80% of the input data (stratified sample),
+    the model was trained and the model was validated using rest of the data as the test set. 
+    Here is the confusion matrix obtained: 
+</p>
+<table id="confusion-matrix">
+    <tr>
+        <th></th>
+        <th>Predicted 0</th>
+        <th>Predicted 1</th>
+        <th>Predicted 2</th>
+    </tr>
+    <tr>
+        <td class="left"><b>Actual 0</b></td>
+        <td>10</td>
+        <td>0</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td class="left"><b>Actual 1</b></td>
+        <td>0</td>
+        <td>10</td>
+        <td>0</td>
+    </tr>
+    <tr>
+        <td class="left"><b>Actual 2</b></td>
+        <td>0</td>
+        <td>1</td>
+        <td>9</td>
+    </tr>
+</table>
+<br>
+
+{% endblock %}
